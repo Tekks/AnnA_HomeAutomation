@@ -29,13 +29,16 @@ def mqttQuery(client, userdata, msg):
     sat = int(float(data["colorCode"].split(",")[1]))
     val = int(float(data["colorCode"].split(",")[2]))
 
-    if (val == 0):
-        bulb.turn_off()
-    else:
-        bulb.turn_on()
-        bulb.set_hsv(hsv, sat, val)
-    
-    log("MQTTTX",str(str(data["device"].replace('[', '').replace(']', '')) + " >> " + data["colorCode"] ),'green')
+    try:
+        if (val == 0):
+            bulb.turn_off()
+        else:
+            bulb.turn_on()
+            bulb.set_hsv(hsv, sat, val)
+        
+        log("MQTTTX",str(str(data["device"].replace('[', '').replace(']', '')) + " >> " + data["colorCode"] ),'green')
+    except:
+        log("MQTTTX",str(str(data["device"].replace('[', '').replace(']', '')) + " >> Host not reachable",'green')
 
 
 try:
