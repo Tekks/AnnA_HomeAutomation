@@ -1,0 +1,27 @@
+on: push
+      
+name: Build and Publish Averment
+jobs:
+  FTP-Deploy-Action:
+    name: SFTP-Deploy-Action
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+
+    - name: Replace <MQTT Password>
+      uses: sensuikan1973/replace-deps@v1.1.0
+      with:
+        extension: "*"
+        regex: '{{{MQTT_PASSWORD}}}'
+        replacement: ${{ secrets.MQTT_PASSWORD }}
+      
+    - name: SFTP-Deploy <anna-sys>
+      uses: wangyucode/sftp-upload-action@v1.1
+      with:
+        host: ${{ secrets.SFTP_SERVER }}
+        username: ${{ secrets.SFTP_USERNAME }}
+        password: ${{ secrets.SFTP_PASSWORD }}
+        port: 22
+        localDir: AnnA-Sys/
+        remoteDir: /home/data
+        git-ftp-args: --insecure
