@@ -1,2 +1,0 @@
-DateTime    currentDateAndTime	"Datum und Uhrzeit [%1$td %1$tB %1$tY %1$tH:%1$tM ]"				{channel="ntp:ntp:anna-sys:dateTime"}
-String      none                "" <none>
