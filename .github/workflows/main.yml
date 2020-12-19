@@ -21,7 +21,29 @@ jobs:
         host: ${{ secrets.SFTP_SERVER }}
         username: ${{ secrets.SFTP_USERNAME }}
         password: ${{ secrets.SFTP_PASSWORD }}
-        port: 22
+        port: 2200
         localDir: AnnA-Sys/Apps/
+        remoteDir: /home/data/Apps
+        git-ftp-args: --insecure
+      
+    - name: SFTP-Deploy <anna-garage>
+      uses: wangyucode/sftp-upload-action@v1.1
+      with:
+        host: ${{ secrets.SFTP_SERVER }}
+        username: ${{ secrets.SFTP_USERNAME }}
+        password: ${{ secrets.SFTP_PASSWORD }}
+        port: 2201
+        localDir: AnnA-Garage/Apps/
+        remoteDir: /home/data/Apps
+        git-ftp-args: --insecure
+
+    - name: SFTP-Deploy <anna-solar>
+      uses: wangyucode/sftp-upload-action@v1.1
+      with:
+        host: ${{ secrets.SFTP_SERVER }}
+        username: ${{ secrets.SFTP_USERNAME }}
+        password: ${{ secrets.SFTP_PASSWORD }}
+        port: 2202
+        localDir: AnnA-Solar/Apps/
         remoteDir: /home/data/Apps
         git-ftp-args: --insecure
