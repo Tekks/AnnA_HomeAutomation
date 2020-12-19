@@ -1,0 +1,125 @@
+var float NSolarCollectorsWattsSum = 0
+var float NNetworkPowerWattsSum = 0
+rule "TmpStr2Flt"
+when
+    Item TopfloorWestTempSensor received update
+then
+    val String json = (TopfloorWestTempSensor.state as StringType).toString
+
+    val Number Temperature  = Float::parseFloat(transform("JSONPATH", "$.temperature", json))
+	val Number Humidity     = Float::parseFloat(transform("JSONPATH", "$.humidity", json))
+	val Number Pressure     = Float::parseFloat(transform("JSONPATH", "$.pressure", json))
+
+    TopfloorWestTempSensorTemperature.postUpdate(Temperature)
+    TopfloorWestTempSensorHumidity.postUpdate(Humidity)
+    TopfloorWestTempSensorPressure.postUpdate(Pressure)
+
+end
+////////
+rule "TmpStr2Flt"
+when
+    Item GroundfloorFloorTempSensor received update
+then
+    val String json = (GroundfloorFloorTempSensor.state as StringType).toString
+
+    val Number Temperature  = Float::parseFloat(transform("JSONPATH", "$.temperature", json))
+	val Number Humidity     = Float::parseFloat(transform("JSONPATH", "$.humidity", json))
+	val Number Pressure     = Float::parseFloat(transform("JSONPATH", "$.pressure", json))
+
+    GroundfloorFloorTempSensorTemperature.postUpdate(Temperature)
+    GroundfloorFloorTempSensorHumidity.postUpdate(Humidity)
+    GroundfloorFloorTempSensorPressure.postUpdate(Pressure)
+end
+////////
+rule "TmpStr2Flt"
+when
+    Item GroundfloorLivingroomTempSensor received update
+then
+    val String json = (GroundfloorLivingroomTempSensor.state as StringType).toString
+
+    val Number Temperature  = Float::parseFloat(transform("JSONPATH", "$.temperature", json))
+	val Number Humidity     = Float::parseFloat(transform("JSONPATH", "$.humidity", json))
+	val Number Pressure     = Float::parseFloat(transform("JSONPATH", "$.pressure", json))
+
+    GroundfloorLivingroomTempSensorTemperature.postUpdate(Temperature)
+    GroundfloorLivingroomTempSensorHumidity.postUpdate(Humidity)
+    GroundfloorLivingroomTempSensorPressure.postUpdate(Pressure)
+end
+////////
+rule "TmpStr2Flt"
+when
+    Item Solar01 received update
+then
+    val String json = (Solar01.state as StringType).toString
+
+    val float SolarCollectorsVoltage = Float::parseFloat(transform("JSONPATH", "$.SolarCollectorsVoltage", json))
+	val float SolarCollectorsAmpere  = Float::parseFloat(transform("JSONPATH", "$.SolarCollectorsAmpere", json))
+	val float SolarCollectorsWatts   = Float::parseFloat(transform("JSONPATH", "$.SolarCollectorsWatts", json))
+	val float NetworkPowerVoltage    = Float::parseFloat(transform("JSONPATH", "$.NetworkPowerVoltage", json))
+	val float NetworkPowerAmpere     = Float::parseFloat(transform("JSONPATH", "$.NetworkPowerAmpere", json))
+	val float NetworkPowerWatts      = Float::parseFloat(transform("JSONPATH", "$.NetworkPowerWatts", json))
+	val float InverterTemperature    = Float::parseFloat(transform("JSONPATH", "$.InverterTemperature", json))
+
+    SolarCollectorsVoltage01.postUpdate(SolarCollectorsVoltage)
+    SolarCollectorsAmpere01.postUpdate(SolarCollectorsAmpere)
+    SolarCollectorsWatts01.postUpdate(SolarCollectorsWatts)
+    NetworkPowerVoltage01.postUpdate(NetworkPowerVoltage)
+    NetworkPowerAmpere01.postUpdate(NetworkPowerAmpere)
+    NetworkPowerWatts01.postUpdate(NetworkPowerWatts)
+    InverterTemperature01.postUpdate(InverterTemperature)
+
+    NSolarCollectorsWattsSum = SolarCollectorsWatts
+    NNetworkPowerWattsSum = NetworkPowerWatts
+end
+////////
+rule "TmpStr2Flt"
+when
+    Item Solar02 received update
+then
+    val String json = (Solar02.state as StringType).toString
+
+    val float SolarCollectorsVoltage = Float::parseFloat(transform("JSONPATH", "$.SolarCollectorsVoltage", json))
+	val float SolarCollectorsAmpere  = Float::parseFloat(transform("JSONPATH", "$.SolarCollectorsAmpere", json))
+	val float SolarCollectorsWatts   = Float::parseFloat(transform("JSONPATH", "$.SolarCollectorsWatts", json))
+	val float NetworkPowerVoltage    = Float::parseFloat(transform("JSONPATH", "$.NetworkPowerVoltage", json))
+	val float NetworkPowerAmpere     = Float::parseFloat(transform("JSONPATH", "$.NetworkPowerAmpere", json))
+	val float NetworkPowerWatts      = Float::parseFloat(transform("JSONPATH", "$.NetworkPowerWatts", json))
+	val float InverterTemperature    = Float::parseFloat(transform("JSONPATH", "$.InverterTemperature", json))
+
+    SolarCollectorsVoltage02.postUpdate(SolarCollectorsVoltage)
+    SolarCollectorsAmpere02.postUpdate(SolarCollectorsAmpere)
+    SolarCollectorsWatts02.postUpdate(SolarCollectorsWatts)
+    NetworkPowerVoltage02.postUpdate(NetworkPowerVoltage)
+    NetworkPowerAmpere02.postUpdate(NetworkPowerAmpere)
+    NetworkPowerWatts02.postUpdate(NetworkPowerWatts)
+    InverterTemperature02.postUpdate(InverterTemperature)
+
+    SolarCollectorsWattsSum.postUpdate(NSolarCollectorsWattsSum + SolarCollectorsWatts)
+    NetworkPowerWattsSum.postUpdate(NNetworkPowerWattsSum + NetworkPowerWatts)
+end
+////////
+rule "KWHCalc"
+when
+    Item SolarCollectorsWattsSum received update
+then
+    if (CompletePanelPowerHour.state == NULL) {
+        CompletePanelPowerHour.sendCommand(0)
+    }
+    val Number newVal = SolarCollectorsWattsSum.state as DecimalType
+    val Number oldVal = CompletePanelPowerHour.state as DecimalType
+    val Number tmp = newVal / 360
+    CompletePanelPowerHour.postUpdate(tmp + oldVal)
+end
+////////
+rule "KWHCalc"
+when
+    Item NetworkPowerWattsSum received update
+then
+    if (CompleteNetworkPowerHour.state == NULL) {
+        CompleteNetworkPowerHour.sendCommand(0)
+    }
+    val Number newVal = NetworkPowerWattsSum.state as DecimalType
+    val Number oldVal = CompleteNetworkPowerHour.state as DecimalType
+    val Number tmp = newVal / 360
+    CompleteNetworkPowerHour.postUpdate(tmp + oldVal)
+end

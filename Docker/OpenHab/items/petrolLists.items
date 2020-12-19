@@ -1,0 +1,13 @@
+String LastPetrolUpdate "Zuletzt Aktualisiert um [%s]"
+
+String E5OedheimEDI "Benzin E5 [%s]" <gas>
+String E10OedheimEDI "Benzin E10 [%s]" <gas>
+String DieselOedheimEDI "Diesel [%s]" <gas>
+
+String E5FriedrichshallAGIP "Benzin E5 [%s]" <gas>
+String E10FriedrichshallAGIP "Benzin E10 [%s]" <gas>
+String DieselFriedrichshallAGIP "Diesel [%s]" <gas>
+
+String E5NeckarsulmKaufland "Benzin E5 [%s]" <gas>
+String E10NeckarsulmKaufland "Benzin E10 [%s]" <gas>
+String DieselNeckarsulmKaufland "Diesel [%s]" <gas>

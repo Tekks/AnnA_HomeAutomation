@@ -1,0 +1,31 @@
+
+Group influxSolar
+
+String Solar01                      ""                                  {channel="mqtt:topic:anna:Systems:Solar:s01"}
+String OperatingHoursCounter01      "Sonnen Stunden [%s]"               {channel="mqtt:topic:anna:Systems:Solar:s01"[profile="transform:JSONPATH", function="$.OperatingHoursCounter"]}
+String State01                      "Einspeise Status [%s]"             {channel="mqtt:topic:anna:Systems:Solar:s01"[profile="transform:JSONPATH", function="$.State"]}
+Number SolarCollectorsVoltage01     "Spannung [%.2f V]"                 (influxSolar) 
+Number SolarCollectorsAmpere01      "Strom [%.2f A]"                    (influxSolar) 
+Number SolarCollectorsWatts01       "Watt [%.2f W]"                     (influxSolar) 
+Number NetworkPowerVoltage01        "Spannung [%.2f V]"                 (influxSolar) 
+Number NetworkPowerAmpere01         "Strom [%.2f A]"                    (influxSolar)
+Number NetworkPowerWatts01          "Watt [%.2f W]"                     (influxSolar)
+Number InverterTemperature01        "Umrichter Temperatur [%.2f °C]"    (influxSolar)
+
+
+String Solar02                      ""                                  {channel="mqtt:topic:anna:Systems:Solar:s02"}
+String OperatingHoursCounter02      "Sonnen Stunden [%s]"               {channel="mqtt:topic:anna:Systems:Solar:s02"[profile="transform:JSONPATH", function="$.OperatingHoursCounter"]}
+String State02                      "Einspeise Status [%s]"             {channel="mqtt:topic:anna:Systems:Solar:s02"[profile="transform:JSONPATH", function="$.State"]}
+Number SolarCollectorsVoltage02     "Spannung [%.2f V]"                 (influxSolar) 
+Number SolarCollectorsAmpere02      "Strom [%.2f A]"                    (influxSolar) 
+Number SolarCollectorsWatts02       "Watt [%.2f W]"                     (influxSolar) 
+Number NetworkPowerVoltage02        "Spannung [%.2f V]"                 (influxSolar) 
+Number NetworkPowerAmpere02         "Strom [%.2f A]"                    (influxSolar)
+Number NetworkPowerWatts02          "Watt [%.2f W]"                     (influxSolar)
+Number InverterTemperature02        "Umrichter Temperatur [%.2f °C]"    (influxSolar)
+
+Number SolarCollectorsWattsSum      "Panel [%.2f W]"                    (influxSolar) 
+Number NetworkPowerWattsSum         "Netz [%.2f W]"                     (influxSolar)
+
+Number CompletePanelPowerHour       "Panel[%.2f Wh]"                    (influxSolar)
+Number CompleteNetworkPowerHour     "Netz[%.2f Wh]"                     (influxSolar)

@@ -1,0 +1,37 @@
+Group:String  DoorContacts <cdoor>
+String	GroundfloorContactMainDoor                      "Haupteingang [MAP(door.map):%s]"   (DoorContacts)  {channel="mqtt:topic:anna:Groundfloor:ContactMainDoor"[profile="transform:JSONPATH", function="$.contact"]}
+String	GroundfloorLivingroomContactBackDoor            "Schiebetüre [MAP(door.map):%s]"    (DoorContacts)  {channel="mqtt:topic:anna:Groundfloor:Livingroom:ContactBackDoor"[profile="transform:JSONPATH", function="$.contact"]}
+String	GroundfloorClothingroomContactBackDoor          "Umkleidezimmertüre [MAP(door.map):%s]" (DoorContacts)  {channel="mqtt:topic:anna:Groundfloor:Clothingroom:ContactBackDoor"[profile="transform:JSONPATH", function="$.contact"]}
+
+
+// Wetterdaten OG
+Group   TmpStr2Flt
+Group	influxItems
+String	TopfloorWestTempSensor                          ""                      (TmpStr2Flt)    {channel="mqtt:topic:anna:Topfloor:West:TempSensor"}
+String	GroundfloorLivingroomTempSensor                 ""                      (TmpStr2Flt)    {channel="mqtt:topic:anna:Groundfloor:Livingroom:TempSensor"}
+String	GroundfloorFloorTempSensor                      ""                      (TmpStr2Flt)    {channel="mqtt:topic:anna:Groundfloor:Floor:TempSensor"}
+
+Number TopfloorWestTempSensorTemperature                "Temperatur [%.2f]"     (influxItems)
+Number TopfloorWestTempSensorHumidity                   "Feuchtigkeit [%.2f]"   (influxItems)
+Number TopfloorWestTempSensorPressure                   "Luftdruck [%.2f]"      (influxItems)
+
+Number GroundfloorLivingroomTempSensorTemperature       "Temperatur [%.2f]"     (influxItems)
+Number GroundfloorLivingroomTempSensorHumidity          "Feuchtigkeit [%.2f]"   (influxItems)
+Number GroundfloorLivingroomTempSensorPressure          "Luftdruck [%.2f]"      (influxItems)
+
+Number GroundfloorFloorTempSensorTemperature            "Temperatur [%.2f]"     (influxItems)
+Number GroundfloorFloorTempSensorHumidity               "Feuchtigkeit [%.2f]"   (influxItems)
+Number GroundfloorFloorTempSensorPressure               "Luftdruck [%.2f]"      (influxItems)
+
+
+// Switches
+String TopfloorWestSwitch01                             ""                                      {channel="mqtt:topic:anna:Topfloor:West:switch01"[profile="transform:JSONPATH", function="$.click"]}
+
+// Batteriestuff
+String GroundfloorContactMainDoorBattery                "Kontakt Haupttüre [%s]"                {channel="mqtt:topic:anna:Groundfloor:ContactMainDoor"[profile="transform:JSONPATH", function="$.battery"]}
+String TopfloorWestTempSensorBattery                    "Temperatursensor Westzimmer [%s]"      {channel="mqtt:topic:anna:Topfloor:West:TempSensor"[profile="transform:JSONPATH", function="$.battery"]}
+String TopfloorWestSwitch01Battery                      "Schalter Westzimer [%s]"               {channel="mqtt:topic:anna:Topfloor:West:switch01"[profile="transform:JSONPATH", function="$.battery"]}
+String GroundfloorLivingroomTempSensorBattery           "Temperatursensor Wohnzimmer [%s]"      {channel="mqtt:topic:anna:Groundfloor:Livingroom:TempSensor"[profile="transform:JSONPATH", function="$.battery"]}
+String GroundfloorFloorTempSensorBattery                "Temperatursensor Flur [%s]"            {channel="mqtt:topic:anna:Groundfloor:Floor:TempSensor"[profile="transform:JSONPATH", function="$.battery"]}
+String GroundfloorLivingroomContactBackDoorBattery      "Kontakt Terassentüre [%s]"             {channel="mqtt:topic:anna:Groundfloor:Livingroom:ContactBackDoor"[profile="transform:JSONPATH", function="$.battery"]}
+String GroundfloorClothingroomContactDoorBattery        "Kontakt Umkleidetüre [%s]"             {channel="mqtt:topic:anna:Groundfloor:Clothingroom:ContactBackDoor"[profile="transform:JSONPATH", function="$.battery"]}

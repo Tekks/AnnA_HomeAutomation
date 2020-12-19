@@ -1,0 +1,4 @@
+Switch	TopfloorWestLgPower				"TV"                            
+Switch	TopfloorWestLgHiddenPowerOff	"HiddenPowerOff"				{channel="lgwebos:WebOSTV:91a53590-642c-379b-2aa9-188a9e2fffa6:power"}
+Switch	TopfloorWestLgHiddenPowerON		"HiddenPowerOn"					{wol="10.10.10.255#14:C9:13:62:60:83"}
+Switch	TopfloorWestLgMute				"TV Stummschalten"				{channel="lgwebos:WebOSTV:91a53590-642c-379b-2aa9-188a9e2fffa6:mute"}

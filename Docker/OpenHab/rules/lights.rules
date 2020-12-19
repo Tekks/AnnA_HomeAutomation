@@ -1,0 +1,46 @@
+val mqttActions = getActions("mqtt","mqtt:broker:synology")
+
+rule "coloring"
+when
+    Member of yeelights changed
+then
+    mqttActions.publishMQTT("anna/Systems/YeeLights", '{\"device\":\"' + triggeringItem.getTags + '\",\"colorCode\":\"' + triggeringItem.state + '\"}')
+end
+
+
+rule "Scene Lila Rot"
+when
+    Item TopfloorWestScenePurple received update 
+then
+    TopfloorWestCabinetColor.sendCommand("338,100,10")    
+    
+    TopfloorWestRoomLightsGroundColor.postUpdate("290,100,10")
+    TopfloorWestRoomLightsSealingRightColor.postUpdate("4,100,10")
+    TopfloorWestRoomLightsSealingMiddleColor.postUpdate("310,91,10")
+    TopfloorWestRoomLightsSealingLeftColor.postUpdate("4,100,10")
+end
+
+rule "Scene Orange Rot"
+when
+    Item TopfloorWestSceneOrange received update 
+then
+    TopfloorWestCabinetColor.sendCommand("4,100,10")
+    
+    TopfloorWestRoomLightsGroundColor.postUpdate("20,100,10")
+    TopfloorWestRoomLightsSealingRightColor.postUpdate("4,100,10")
+    TopfloorWestRoomLightsSealingMiddleColor.postUpdate("20,100,10")
+    TopfloorWestRoomLightsSealingLeftColor.postUpdate("4,100,10")
+end
+
+rule "Scene Weis"
+when
+    Item TopfloorWestSceneWhite received update 
+then
+    TopfloorWestCabinetColor.sendCommand("0,0,10")  
+
+    TopfloorWestRoomLightsGroundColor.postUpdate("22,22,10")
+    TopfloorWestRoomLightsSealingRightColor.postUpdate("22,22,10")
+    TopfloorWestRoomLightsSealingMiddleColor.postUpdate("22,22,10")
+    TopfloorWestRoomLightsSealingLeftColor.postUpdate("22,22,10")
+end
+

@@ -1,0 +1,59 @@
+Bridge mqtt:broker:synology "MQTT Broker: Synology Mosquitto"[    host="10.10.10.10",    port=11883,    username="anna-sys",    password="{{{MQTT_PASSWORD}}}"]
+
+Thing mqtt:topic:anna:Systems:Solar  "SolarCollector s01/s02"
+     (mqtt:broker:synology) @ "SolarCollector s01/s02"
+{
+    Channels:
+        Type string : s01                                       [stateTopic = "anna/Systems/SolarCollectors/s01"]
+        Type string : s02                                       [stateTopic = "anna/Systems/SolarCollectors/s02"]
+}
+
+Thing mqtt:topic:anna:garage  "Garage"
+     (mqtt:broker:synology) @ "Garage"
+{
+    Channels:
+        Type string : garageState                               [stateTopic = "anna/garage/state"]
+        Type switch : garageOpen                                [commandTopic = "anna/garage/cmd"]
+        Type switch : garageClose                               [commandTopic = "anna/garage/cmd"]
+        Type string : garageRightSpaceState                     [stateTopic = "anna/garage/space/right/state"]
+        Type string : garageLeftSpaceState                      [stateTopic = "anna/garage/space/left/state"]
+}
+
+Thing mqtt:topic:anna:Groundfloor  "Groundfloor"
+     (mqtt:broker:synology) @ "Groundfloor"
+{
+    Channels:
+        Type string : ContactMainDoor                           [stateTopic = "zigbee2mqtt/0x00158d0002f92439"]
+        Type number : stairLightsAutomaticMode                  [commandTopic = "anna/Groundfloor/Floor/StairLights/cmd"]
+}
+
+Thing mqtt:topic:anna:Groundfloor:Floor  "Groundfloor:Floor"
+     (mqtt:broker:synology) @ "Groundfloor:Floor"
+{
+    Channels:
+        Type string : TempSensor                                [stateTopic = "zigbee2mqtt/0x00158d00041850b9"]
+}
+
+Thing mqtt:topic:anna:Groundfloor:Livingroom  "Livingroom"
+     (mqtt:broker:synology) @ "Livingroom"
+{
+    Channels:
+        Type string : TempSensor                                [stateTopic = "zigbee2mqtt/0x00158d000407fe1d"]
+        Type string : ContactBackDoor                           [stateTopic = "zigbee2mqtt/0x00158d000312fe09"]
+}
+
+Thing mqtt:topic:anna:Groundfloor:Clothingroom  "Clothingroom"
+     (mqtt:broker:synology) @ "Clothingroom"
+{
+    Channels:
+        Type string : ContactBackDoor                           [stateTopic = "zigbee2mqtt/0x00158d0003099393"]
+}
+
+Thing mqtt:topic:anna:Topfloor:West  "Topfloor"
+     (mqtt:broker:synology) @ "Topfloor"
+{
+    Channels:
+        Type string : TempSensor                                [stateTopic = "zigbee2mqtt/0x00158d000407fda2"]
+        Type string : switch01                                  [stateTopic = "zigbee2mqtt/0xccccccfffe89f8c2"]
+        Type string : ContactBalconyDoor                        [stateTopic = "zigbee2mqtt/0x00158d00030993c9"]
+}

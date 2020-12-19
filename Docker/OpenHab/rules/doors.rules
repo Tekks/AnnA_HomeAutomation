@@ -1,0 +1,13 @@
+var DoorState = true
+rule "doors"
+when
+    Member of DoorContacts received update
+then
+    DoorState = true
+    DoorContacts.members.forEach[ door | 
+        if (door.state.toString == "false"){
+            DoorState = false
+        }
+    ]
+    if (DoorState) { DoorContacts.postUpdate("true") } else { DoorContacts.postUpdate("false") }
+end

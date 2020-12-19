@@ -1,0 +1,62 @@
+rule  "Initialise all contacts"
+when
+    System started
+then
+    createTimer(now.plusMinutes(2), [ |  //Give the system time to load up
+        mhzSwitches.members.forEach[ i |
+            i.postUpdate(OFF)
+        ]
+    ])
+end
+
+rule "mhz433"
+when 
+    Member of mhzSwitches changed
+then
+    val member = mhzSwitches.members.sortBy[lastUpdate].last
+    val mqttActions = getActions("mqtt","mqtt:broker:synology")
+    switch(member.name.toString) {
+        case "mhz433_CellarMachinesCompressor": {
+            if (member.state == ON){
+                mqttActions.publishMQTT("anna/Systems/433mhz", "{\"device\":\"" + member.name.toString + "\",\"code\":5201}")
+            }else{
+                mqttActions.publishMQTT("anna/Systems/433mhz", "{\"device\":\"" + member.name.toString + "\",\"code\":5200}")
+            }
+        }
+        case "mhz433_TopfloorEastComputer": {
+            if (member.state == ON){
+                mqttActions.publishMQTT("anna/Systems/433mhz", "{\"device\":\"" + member.name.toString + "\",\"code\":83281}")
+            }else{
+                mqttActions.publishMQTT("anna/Systems/433mhz", "{\"device\":\"" + member.name.toString + "\",\"code\":83280}")
+            }
+        }
+        case "mhz433_GroundfloorKitchenDecor": {
+            if (member.state == ON){
+                mqttActions.publishMQTT("anna/Systems/433mhz", "{\"device\":\"" + member.name.toString + "\",\"code\":1053969}")
+            }else{
+                mqttActions.publishMQTT("anna/Systems/433mhz", "{\"device\":\"" + member.name.toString + "\",\"code\":1053968}")
+            }
+        }
+        case "mhz433_TopfloorWestWalllight": {
+            if (member.state == ON){
+                mqttActions.publishMQTT("anna/Systems/433mhz", "{\"device\":\"" + member.name.toString + "\",\"code\":1053009}")
+            }else{
+                mqttActions.publishMQTT("anna/Systems/433mhz", "{\"device\":\"" + member.name.toString + "\",\"code\":1053012}")
+            }
+        }
+        case "mhz433_GardenFountain": {
+            if (member.state == ON){
+                mqttActions.publishMQTT("anna/Systems/433mhz", "{\"device\":\"" + member.name.toString + "\",\"code\":17745}")
+            }else{
+                mqttActions.publishMQTT("anna/Systems/433mhz", "{\"device\":\"" + member.name.toString + "\",\"code\":17744}")
+            }
+        }
+        case "mhz433_GroudfloorFloorDecor": {
+            if (member.state == ON){
+                mqttActions.publishMQTT("anna/Systems/433mhz", "{\"device\":\"" + member.name.toString + "\",\"code\":1049937}")
+            }else{
+                mqttActions.publishMQTT("anna/Systems/433mhz", "{\"device\":\"" + member.name.toString + "\",\"code\":1049936}")
+            }
+        }
+    }
+end

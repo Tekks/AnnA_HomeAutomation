@@ -1,0 +1,55 @@
+rule "PetrolStations"
+when 
+    Time cron "0 0/5 * 1/1 * ? *"
+then
+    var String allObjects = sendHttpGetRequest("https://creativecommons.tankerkoenig.de/json/prices.php?ids=96def5ef-36fe-4061-a48c-075df27fa39a,7b630e43-d13b-406b-8040-ce614ab474d8,7fd064ee-2987-469c-8a22-73ad842feb0c,32c55e44-dd23-4402-8730-114271a4042b,e25076ba-6b66-40f2-a4e8-246bdc28a8d0&apikey={{{PETROLAPI}}}")
+    
+    LastPetrolUpdate.postUpdate(String::format( "%1$td %1$tB %1$tY %1$tH:%1$tM", new java.util.Date ))
+
+    // EDI Oedheim
+    if ( transform("JSONPATH", "$.prices.96def5ef-36fe-4061-a48c-075df27fa39a.status", allObjects) == "closed" ) {
+        E5OedheimEDI.postUpdate("Geschlossen")
+        E10OedheimEDI.postUpdate("Geschlossen")
+        DieselOedheimEDI.postUpdate("Geschlossen")
+    } else {
+        E5OedheimEDI.postUpdate(transform("JSONPATH", "$.prices.96def5ef-36fe-4061-a48c-075df27fa39a.e5", allObjects) + " €")
+        E10OedheimEDI.postUpdate(transform("JSONPATH", "$.prices.96def5ef-36fe-4061-a48c-075df27fa39a.e10", allObjects) + " €")
+        DieselOedheimEDI.postUpdate(transform("JSONPATH", "$.prices.96def5ef-36fe-4061-a48c-075df27fa39a.diesel", allObjects) + " €")
+    }
+    // AGIP Friedrichshall
+    if ( transform("JSONPATH", "$.prices.7fd064ee-2987-469c-8a22-73ad842feb0c.status", allObjects) == "closed" ) {
+        E5FriedrichshallAGIP.postUpdate("Geschlossen")
+        E10FriedrichshallAGIP.postUpdate("Geschlossen")
+        DieselFriedrichshallAGIP.postUpdate("Geschlossen")
+    } else {
+        E5FriedrichshallAGIP.postUpdate(transform("JSONPATH", "$.prices.7fd064ee-2987-469c-8a22-73ad842feb0c.e5", allObjects) + " €")
+        E10FriedrichshallAGIP.postUpdate(transform("JSONPATH", "$.prices.7fd064ee-2987-469c-8a22-73ad842feb0c.e10", allObjects) + " €")
+        DieselFriedrichshallAGIP.postUpdate(transform("JSONPATH", "$.prices.7fd064ee-2987-469c-8a22-73ad842feb0c.diesel", allObjects) + " €")
+    }
+    // KAUFLAND Neckarsulm
+    if ( transform("JSONPATH", "$.prices.e25076ba-6b66-40f2-a4e8-246bdc28a8d0.status", allObjects) == "closed" ) {
+        E5NeckarsulmKaufland.postUpdate("Geschlossen")
+        E10NeckarsulmKaufland.postUpdate("Geschlossen")
+        DieselNeckarsulmKaufland.postUpdate("Geschlossen")
+    } else {
+        E5NeckarsulmKaufland.postUpdate(transform("JSONPATH", "$.prices.e25076ba-6b66-40f2-a4e8-246bdc28a8d0.e5", allObjects) + " €")
+        E10NeckarsulmKaufland.postUpdate(transform("JSONPATH", "$.prices.e25076ba-6b66-40f2-a4e8-246bdc28a8d0.e10", allObjects) + " €")
+        DieselNeckarsulmKaufland.postUpdate(transform("JSONPATH", "$.prices.e25076ba-6b66-40f2-a4e8-246bdc28a8d0.diesel", allObjects) + " €")
+    }
+end
+///////
+rule "StairLight reset"
+when
+    Time cron "0 0 6 1/1 * ? *" or
+    Time cron "0 0 7 1/1 * ? *"
+then
+    stairLightsAutomaticMode.sendCommand(2)
+end
+////////
+rule "Solar reset"
+when
+    Time cron "0 0 0 ? * *"
+then
+    CompletePanelPowerHour.sendCommand(0)
+    CompleteNetworkPowerHour.sendCommand(0)
+end

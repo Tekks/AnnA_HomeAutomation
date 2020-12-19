@@ -1,0 +1,1 @@
+Color TopfloorWestCabinetColor     "Schrank Beleuchtung"        {channel="wifiled:wifiled:Topfloor:Cabinet:color", ga="Light" [ roomhint="OG Westzimmer" ] }

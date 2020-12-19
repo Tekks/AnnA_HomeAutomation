@@ -1,0 +1,5 @@
+Bridge avmfritz:fritzbox:1 "FritzBox" [ ipAddress="10.10.10.1", password="{{{ROUTER_PASSWORD}}}-", user="{{{ROUTER_USERNAME}}}" ] {
+    Thing Comet_DECT 133570907608 "Andy" [ ain="133570907608" ]
+    Thing Comet_DECT 133570908104 "Anita" [ ain="133570908104" ]
+    Thing Comet_DECT 140780126560 "Bad" [ ain="140780126560" ]
+}

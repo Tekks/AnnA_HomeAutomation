@@ -1,0 +1,7 @@
+Group	mhzSwitches
+Switch	mhz433_CellarMachinesCompressor	    "Kompressor"            (mhzSwitches)   { ga="Outlet" [ roomhint="UG Keller" ] }
+Switch	mhz433_TopfloorEastComputer		    "Computer"              (mhzSwitches)   { ga="Outlet" [ name="Anita PC", roomhint="OG Ostzimmer" ] }
+Switch	mhz433_TopfloorWestWalllight	    "Wandbeleuchtung"       (mhzSwitches)   
+Switch	mhz433_GroundfloorKitchenDecor      "Beleuchtung"           (mhzSwitches)   { ga="Light" [ name="Küchenbeleuchtung", roomhint="Küche" ]}
+Switch	mhz433_GardenFountain 			    "Brunnen"               (mhzSwitches)   { ga="Outlet" [ roomhint="Garten" ] }
+Switch	mhz433_GroudfloorFloorDecor 	    "Treppe Decor"          (mhzSwitches)   { ga="Light" [ roomhint="Flur" ] }

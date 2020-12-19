@@ -1,0 +1,9 @@
+rule "TV OnOff"
+when
+    Item TopfloorWestLgPower received command
+then switch (receivedCommand)
+    {
+	case ON: { TopfloorWestLgHiddenPowerON.sendCommand(ON) }
+    case OFF: { TopfloorWestLgHiddenPowerOff.sendCommand(OFF) }
+	}
+end

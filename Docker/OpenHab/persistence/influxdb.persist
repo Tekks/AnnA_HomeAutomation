@@ -1,0 +1,11 @@
+Strategies {
+    everyMinute : "* /30 * * * ?"
+    everyMinute : "0 * * * * ?"
+    everyHour   : "0 0 * * * ?"
+    everyDay    : "0 0 0 * * ?"
+}
+
+Items {
+    influxItems*   : strategy = everyChange, everyMinute
+    influxSolar*   : strategy = everyMinute
+}

@@ -1,0 +1,16 @@
+Switch	fboxGuestWifi		"Gäste W-Lan"												{fritzboxtr064="wifiGuestSwitch"}
+String	fBoxUpStreamLimit	"Internet Upload [JS(mathBitToMByte.js):%s]"				{fritzboxtr064="wanLayer1UpstreamMaxBitRate"}
+String	fBoxDownStreamLimit	"Internet Download [JS(mathBitToMByte.js):%s]"				{fritzboxtr064="wanLayer1DownstreamMaxBitRate"}
+String	fboxWanIP			"WAN IP [%s]"												{fritzboxtr064="wanip"}
+
+Number:Temperature TopfloorEastTempControllerGet "Aktuell [%.1f %unit%]" { channel="avmfritz:Comet_DECT:1:133570908104:actual_temp" }
+Number:Temperature TopfloorEastTempControllerSet "Einstellwert [%.1f %unit%]" { channel="avmfritz:Comet_DECT:1:133570908104:set_temp" }
+Number TopfloorEastTempControllerBattery "Batterie Regler [%s]%" { channel="avmfritz:Comet_DECT:1:133570908104:battery_level" }
+
+Number:Temperature TopfloorWestTempControllerGet "Aktuell [%.1f %unit%]" { channel="avmfritz:Comet_DECT:1:133570907608:actual_temp" }
+Number:Temperature TopfloorWestTempControllerSet "Einstellwert [%.1f %unit%]" { channel="avmfritz:Comet_DECT:1:133570907608:set_temp" }
+Number TopfloorWestTempControllerBattery "Batterie Regler [%s]%" { channel="avmfritz:Comet_DECT:1:133570907608:battery_level" }
+
+Number:Temperature GroundfloorBathTempControllerGet "Aktuell [%.1f %unit%]" { channel="avmfritz:Comet_DECT:1:140780126560:actual_temp" }
+Number:Temperature GroundfloorBathTempControllerSet "Einstellwert [%.1f %unit%]" { channel="avmfritz:Comet_DECT:1:140780126560:set_temp" }
+Number GroundfloorBathTempControllerBattery "Batterie Regler [%s]%" { channel="avmfritz:Comet_DECT:1:140780126560:battery_level" }

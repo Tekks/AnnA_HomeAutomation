@@ -1,0 +1,6 @@
+Switch	mqttGarageOpen			"Garage Öffnen[]"											{channel="mqtt:topic:anna:garage:garageOpen"}
+Switch	mqttGarageClose			"Garage Schließen[]"										{channel="mqtt:topic:anna:garage:garageClose"}
+String	currentgarageState		"Garage Status [MAP(garage.map):%s]"	<cgarage>			{channel="mqtt:topic:anna:garage:garageState"}
+String	currentgarageStateTopic	"[]"									<cgarage>			{channel="mqtt:topic:anna:garage:garageState"}
+String  rightGarageSlot         "Rechter Parkplatz [MAP(garage.map):%s]"<cgaragespace>      {channel="mqtt:topic:anna:garage:garageRightSpaceState"}
+String  leftGarageSlot          "Linker Parkplatz [MAP(garage.map):%s]" <cgaragespace>      {channel="mqtt:topic:anna:garage:garageLeftSpaceState"}

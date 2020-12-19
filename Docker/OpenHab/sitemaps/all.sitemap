@@ -1,0 +1,192 @@
+sitemap all label="AnnA - Home" {
+	Frame label="Datum und Uhrzeit" {
+		Text item=currentDateAndTime icon="calendar"
+	}
+	//
+	// Allgemein
+	//
+	Frame label="Allgemein" {
+		Text label="Klimadaten" icon="temperature" {
+			Webview height=10 url="https://grafana.tks.wtf/d-solo/X_17UgVGk/anna-temperaturen?orgId=1&from=now-7d&to=now&panelId=2" icon=none
+			Webview height=10 url="https://grafana.tks.wtf/d-solo/X_17UgVGk/anna-temperaturen?orgId=1&from=now-7d&to=now&panelId=3" icon=none
+			Webview height=10 url="https://grafana.tks.wtf/d-solo/X_17UgVGk/anna-temperaturen?orgId=1&from=now-7d&to=now&panelId=4" icon=none
+		}
+		Text label="Türsteuerung" item=DoorContacts {
+			Frame label="Türsteuerung" {
+				Text item=GroundfloorContactMainDoor icon="cdoor"
+				Text item=GroundfloorLivingroomContactBackDoor icon="cdoor"
+				Text item=GroundfloorClothingroomContactBackDoor icon="cdoor"
+			}
+		}
+		Text label="Benzinpreise" icon="gas" {
+			Frame label="Aktualisiert" {
+				Text item=LastPetrolUpdate icon="update"
+			}
+			Frame label="Oedheim EDI" {
+				Text item=E5OedheimEDI 
+				Text item=E10OedheimEDI 
+				Text item=DieselOedheimEDI 
+			}
+			Frame label="Friedrichshall AGIP" {
+				Text item=E5FriedrichshallAGIP 
+				Text item=E10FriedrichshallAGIP 
+				Text item=DieselFriedrichshallAGIP 
+			}
+			Frame label="Neckarsulm Kaufland" {
+				Text item=E5NeckarsulmKaufland 
+				Text item=E10NeckarsulmKaufland 
+				Text item=DieselNeckarsulmKaufland 
+			}	
+		}
+	}
+	//
+	// Außenbereich
+	//
+	Frame label="Außenbereich" {
+		Text label="Garage" item=currentgarageStateTopic{
+			Frame label="Garagen Status" {
+				Text item=currentgarageState 
+			}
+			Frame label="Garagen Steuerung" {
+				Switch item=mqttGarageOpen mappings=[ON="Öffnen"] icon="cgarageopening"
+				Switch item=mqttGarageClose mappings=[OFF="Schließen"] icon="cgarageclosing"
+			}
+			Frame label="Garagen Belegung" {
+				Text item=leftGarageSlot
+				Text item=rightGarageSlot
+			}
+		}
+		Text label="Garten" icon="garden" {
+			Switch item=mhz433_GardenFountain
+		}
+		Text label="PV Anlage" icon="solarpanel" {
+			Frame label="Tagesleistung" {
+				Default item=CompletePanelPowerHour icon="cenergy"
+				Default item=CompleteNetworkPowerHour icon="cenergy"
+			}
+			Frame label="Aktuelle Leistung" {
+				Default item=SolarCollectorsWattsSum icon="cenergy"
+				Default item=NetworkPowerWattsSum icon="cenergy"
+			}
+			Frame label="Umrichter 1 Daten" {
+				Default item=OperatingHoursCounter01 icon=sun
+				Default item=InverterTemperature01 icon="temperature"
+				Default item=State01 icon=transformator
+			}
+			Frame label="Umrichter 1 - Panel" {
+				Default item=SolarCollectorsVoltage01 icon="solarpanel"
+				Default item=SolarCollectorsAmpere01 icon="solarpanel"
+				Default item=SolarCollectorsWatts01 icon="solarpanel"
+			}
+			Frame label="Umrichter 1 - Netz" {
+				Default item=NetworkPowerVoltage01 icon="pole"
+				Default item=NetworkPowerAmpere01 icon="pole"
+				Default item=NetworkPowerWatts01 icon="pole"
+			}
+			Frame label="Umrichter 2 - Daten" {
+				Default item=OperatingHoursCounter02 icon=sun
+				Default item=InverterTemperature02 icon="temperature"
+				Default item=State02 icon=transformator
+			}
+			Frame label="Umrichter 2 - Panel" {
+				Default item=SolarCollectorsVoltage02 icon="solarpanel"
+				Default item=SolarCollectorsAmpere02 icon="solarpanel"
+				Default item=SolarCollectorsWatts02 icon="solarpanel"
+			}
+			Frame label="Umrichter 2 - Netz" {
+				Default item=NetworkPowerVoltage02 icon="pole"
+				Default item=NetworkPowerAmpere02 icon="pole"
+				Default item=NetworkPowerWatts02 icon="pole"
+			}
+		}
+	}
+	//
+	// Dachgeschoss
+	//
+	Frame label="Dachgeschoss" {
+		Text label="Westzimmer" icon="folder" {
+			Frame label="Beleuchtung" {
+				Default item=TopfloorWestCabinetColor
+				Default item=TopfloorWestRoomLightsGroundColor
+				Default item=TopfloorWestRoomLightsSealingRightColor
+				Default item=TopfloorWestRoomLightsSealingMiddleColor
+				Default item=TopfloorWestRoomLightsSealingLeftColor
+				Switch item=TopfloorWestScenePurple mappings=[ON="Aktivieren"]
+				Switch item=TopfloorWestSceneWhite mappings=[ON="Aktivieren"]
+				Switch item=TopfloorWestSceneOrange mappings=[ON="Aktivieren"]
+			}
+			Frame label="TV" {
+				Switch item=TopfloorWestLgPower
+			}
+			Frame label="Temperatur" {
+				Text item=TopfloorWestTempControllerGet icon="temperature"
+        		Setpoint item=TopfloorWestTempControllerSet minValue=8.0 maxValue=28.0 step=0.5 icon="temperature"
+				Text item=TopfloorWestTempControllerBattery icon="battery"
+			}
+		}
+		Text label="Ostzimmer" icon="roomkey" {
+			Frame label="Computer" {
+				Switch item=mhz433_TopfloorEastComputer
+			}
+			Frame label="Temperatur" {
+				Text item=TopfloorEastTempControllerGet icon="temperature"
+        		Setpoint item=TopfloorEastTempControllerSet minValue=8.0 maxValue=28.0 step=0.5 icon="temperature"
+				Text item=TopfloorEastTempControllerBattery icon="battery"
+			}
+		}
+	}
+	//
+	// Erdgeschoss
+	//
+	Frame label="Erdgeschoss" {
+		Switch item=stairLightsAutomaticMode mappings=[1="Ein",2="Auto", 0="Aus"] icon="cmode"
+		Default item=mhz433_GroudfloorFloorDecor icon="light"
+		Text label="Küche" icon="kitchen" {
+			Default item=mhz433_GroundfloorKitchenDecor icon="light"
+		}
+		Text label="Bad" icon="bathroom" {
+			Text item=GroundfloorBathTempControllerGet icon="temperature"
+			Setpoint item=GroundfloorBathTempControllerSet minValue=8.0 maxValue=28.0 step=0.5 icon="temperature"
+			Text item=GroundfloorBathTempControllerBattery icon="battery"
+		}
+	}
+	//
+	// Keller
+	//
+	Frame label="Keller" {
+		Text label="Maschinen" icon="roboticarm" {
+			Switch item=mhz433_CellarMachinesCompressor icon="compressor"
+		}
+	}
+	//
+	// Server
+	//
+	Frame label="Cluster Server" {
+		Text  label="Internet Router" icon="router" {
+			Frame label="W-LAN" {
+				Switch item=fboxGuestWifi icon="wifi"
+			}
+			Frame label="Internet" {
+				Text item=fboxWanIP icon="ip"
+				Text item=fBoxUpStreamLimit icon="upload"
+				Text item=fBoxDownStreamLimit icon="download"
+			}
+		}
+		Text  label="Server System" icon="satellite" {
+			Text label="Zigbee System" {
+				Frame label="Dachgeschoss" {
+					Default item=TopfloorWestTempSensorBattery icon="battery"
+					Default item=TopfloorWestSwitch01Battery icon="battery"
+				}
+				Frame label="Erdgeschoss" {
+					Default item=GroundfloorContactMainDoorBattery icon="battery"
+					Default item=GroundfloorLivingroomContactBackDoorBattery icon="battery"
+					Default item=GroundfloorLivingroomTempSensorBattery icon="battery"
+					Default item=GroundfloorFloorTempSensorBattery icon="battery"
+					Default item=GroundfloorClothingroomContactDoorBattery icon="battery"
+
+				}	
+			}
+		}
+	}
+}

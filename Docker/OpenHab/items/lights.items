@@ -1,0 +1,1 @@
+Number	stairLightsAutomaticMode	"Treppenlicht[]"        {channel="mqtt:topic:anna:Groundfloor:stairLightsAutomaticMode"}

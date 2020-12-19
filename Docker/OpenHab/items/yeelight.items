@@ -1,0 +1,10 @@
+Group yeelights
+Color TopfloorWestRoomLightsGroundColor "Wandleuchte" (yeelights) ["10.10.10.222"] { ga="Light" [ roomhint="OG Westzimmer" ] }
+
+Color TopfloorWestRoomLightsSealingRightColor "Deckenleuchte Rechts" (yeelights) ["10.10.10.220"] { ga="Light" [ roomhint="OG Westzimmer" ] }
+Color TopfloorWestRoomLightsSealingMiddleColor "Deckenleuchte Mitte" (yeelights) ["10.10.10.223"] { ga="Light" [ roomhint="OG Westzimmer" ] }
+Color TopfloorWestRoomLightsSealingLeftColor "Deckenleuchte Links" (yeelights) ["10.10.10.221"] { ga="Light" [ roomhint="OG Westzimmer" ] }
+
+Switch TopfloorWestScenePurple "Raumbeleuchtung Lila" { ga="Scene" }
+Switch TopfloorWestSceneWhite "Raumbeleuchtung Weiß" { ga="Scene" }
+Switch TopfloorWestSceneOrange "Raumbeleuchtung Orange" { ga="Scene" }

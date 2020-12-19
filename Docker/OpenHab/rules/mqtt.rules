@@ -1,0 +1,32 @@
+rule "mqtt switch01"
+when
+    Item TopfloorWestSwitch01 received update
+then
+    val state = (TopfloorWestSwitch01.state as StringType).toString
+    switch( state ) {
+        case "on": {
+            mhz433_TopfloorWestWalllight.sendCommand(ON)
+            Thread::sleep(1000)
+        }
+        case "off": {
+            mhz433_TopfloorWestWalllight.sendCommand(OFF)
+        }
+        case "1": {
+            if ( mhz433_TopfloorWestWalllight.state === ON ){ mhz433_TopfloorWestWalllight.sendCommand(OFF) } else { mhz433_TopfloorWestWalllight.sendCommand(ON) }
+        }
+        case "2": {
+        }
+        case "3": {
+
+        }
+        case "4": {
+
+        }
+        case "5": {
+
+        }
+        case "6": {
+
+        }
+    }
+end
