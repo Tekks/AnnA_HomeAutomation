@@ -38,7 +38,7 @@ def mqttQuery(client, userdata, msg):
         
         log("MQTTTX",str(str(data["device"].replace('[', '').replace(']', '')) + " >> " + data["colorCode"] ),'green')
     except:
-        log("MQTTTX",str(str(data["device"].replace('[', '').replace(']', '')) + " >> Host not reachable" ),'green')
+        log("MQTTTX",str(str(data["device"].replace('[', '').replace(']', '')) + " >> Host not reachable" ),'red')
 
 
 try:
