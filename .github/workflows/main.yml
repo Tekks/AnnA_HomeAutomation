@@ -14,7 +14,28 @@ jobs:
         extension: "*"
         regex: '{{{MQTT_PASSWORD}}}'
         replacement: ${{ secrets.MQTT_PASSWORD }}
-      
+
+    - name: Replace <PETROLAPI>
+      uses: sensuikan1973/replace-deps@v1.1.0
+      with:
+        extension: "*"
+        regex: '{{{PETROLAPI}}}'
+        replacement: ${{ secrets.PETROLAPI }} ROUTER_PASSWORD
+    
+    - name: Replace <ROUTER_PASSWORD>
+      uses: sensuikan1973/replace-deps@v1.1.0
+      with:
+        extension: "*"
+        regex: '{{{ROUTER_PASSWORD}}}'
+        replacement: ${{ secrets.ROUTER_PASSWORD }} 
+    
+    - name: Replace <INFLUXDB_KEYGEN>
+      uses: sensuikan1973/replace-deps@v1.1.0
+      with:
+        extension: "*"
+        regex: '{{{INFLUXDB_KEYGEN}}}'
+        replacement: ${{ secrets.INFLUXDB_KEYGEN }}
+
     - name: SFTP-Deploy <anna-sys>
       uses: wangyucode/sftp-upload-action@v1.1
       with:
@@ -46,4 +67,15 @@ jobs:
         port: 2202
         localDir: AnnA-Solar/Apps/
         remoteDir: /home/data/Apps
+        git-ftp-args: --insecure
+    
+    - name: SFTP-Deploy <anna-oh>
+      uses: wangyucode/sftp-upload-action@v1.1
+      with:
+        host: ${{ secrets.SFTP_SERVER }}
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        port: 2299
+        localDir: Docker/Openhab/
+        remoteDir: /volume1/docker/openhab/conf
         git-ftp-args: --insecure
