@@ -20,7 +20,14 @@ jobs:
       with:
         extension: "*"
         regex: '{{{PETROLAPI}}}'
-        replacement: ${{ secrets.PETROLAPI }} ROUTER_PASSWORD
+        replacement: ${{ secrets.PETROLAPI }}
+    
+    - name: Replace <ROUTER_USERNAME>
+      uses: sensuikan1973/replace-deps@v1.1.0
+      with:
+        extension: "*"
+        regex: '{{{ROUTER_USERNAME}}}'
+        replacement: ${{ secrets.ROUTER_USERNAME }} 
     
     - name: Replace <ROUTER_PASSWORD>
       uses: sensuikan1973/replace-deps@v1.1.0
@@ -76,6 +83,6 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         port: 2299
-        localDir: Docker/Openhab/
-        remoteDir: /volume1/docker/openhab/conf
+        localDir: Docker/OpenHab/
+        remoteDir: /docker/openhab/conf
         git-ftp-args: --insecure
