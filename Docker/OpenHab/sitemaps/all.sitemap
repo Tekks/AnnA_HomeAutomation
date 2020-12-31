@@ -120,7 +120,7 @@ sitemap all label="AnnA - Home" {
 			}
 			Frame label="Temperatur" {
 				Text item=TopfloorWestTempControllerGet icon="temperature"
-        		Setpoint item=TopfloorWestTempControllerSet minValue=8.0 maxValue=28.0 step=0.5 icon="temperature"
+        		Setpoint item=TopfloorWestTempControllerSet minValue=6.0 maxValue=28.0 step=0.5 icon="temperature"
 				Text item=TopfloorWestTempControllerBattery icon="battery"
 			}
 		}
@@ -130,7 +130,7 @@ sitemap all label="AnnA - Home" {
 			}
 			Frame label="Temperatur" {
 				Text item=TopfloorEastTempControllerGet icon="temperature"
-        		Setpoint item=TopfloorEastTempControllerSet minValue=8.0 maxValue=28.0 step=0.5 icon="temperature"
+        		Setpoint item=TopfloorEastTempControllerSet minValue=6.0 maxValue=28.0 step=0.5 icon="temperature"
 				Text item=TopfloorEastTempControllerBattery icon="battery"
 			}
 		}
@@ -146,7 +146,7 @@ sitemap all label="AnnA - Home" {
 		}
 		Text label="Bad" icon="bathroom" {
 			Text item=GroundfloorBathTempControllerGet icon="temperature"
-			Setpoint item=GroundfloorBathTempControllerSet minValue=8.0 maxValue=28.0 step=0.5 icon="temperature"
+			Setpoint item=GroundfloorBathTempControllerSet minValue=6.0 maxValue=28.0 step=0.5 icon="temperature"
 			Text item=GroundfloorBathTempControllerBattery icon="battery"
 		}
 	}
