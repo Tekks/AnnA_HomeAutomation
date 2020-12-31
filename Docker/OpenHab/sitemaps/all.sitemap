@@ -111,9 +111,10 @@ sitemap all label="AnnA - Home" {
 				Default item=TopfloorWestRoomLightsSealingRightColor
 				Default item=TopfloorWestRoomLightsSealingMiddleColor
 				Default item=TopfloorWestRoomLightsSealingLeftColor
-				Switch item=TopfloorWestScenePurple mappings=[ON="Aktivieren"]
 				Switch item=TopfloorWestSceneWhite mappings=[ON="Aktivieren"]
+				Switch item=TopfloorWestScenePurple mappings=[ON="Aktivieren"]
 				Switch item=TopfloorWestSceneOrange mappings=[ON="Aktivieren"]
+				Switch item=TopfloorWestSceneBlue mappings=[ON="Aktivieren"]
 			}
 			Frame label="TV" {
 				Switch item=TopfloorWestLgPower

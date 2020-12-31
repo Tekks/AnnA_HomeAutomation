@@ -8,3 +8,4 @@ Color TopfloorWestRoomLightsSealingLeftColor "Deckenleuchte Links" (yeelights) [
 Switch TopfloorWestScenePurple "Raumbeleuchtung Lila" { ga="Scene" }
 Switch TopfloorWestSceneWhite "Raumbeleuchtung Weiß" { ga="Scene" }
 Switch TopfloorWestSceneOrange "Raumbeleuchtung Orange" { ga="Scene" }
+Switch TopfloorWestSceneBlue "Raumbeleuchtung Blau" { ga="Scene" }

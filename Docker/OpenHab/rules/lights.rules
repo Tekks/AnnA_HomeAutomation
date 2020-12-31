@@ -44,3 +44,15 @@ then
     TopfloorWestRoomLightsSealingLeftColor.postUpdate("22,22,10")
 end
 
+rule "Scene Blau"
+when
+    Item TopfloorWestSceneBlue received update 
+then
+    TopfloorWestCabinetColor.sendCommand("0,0,10")  
+
+    TopfloorWestRoomLightsGroundColor.postUpdate("130,94,10")
+    TopfloorWestRoomLightsSealingRightColor.postUpdate("230,1,10")
+    TopfloorWestRoomLightsSealingMiddleColor.postUpdate("130,94,10")
+    TopfloorWestRoomLightsSealingLeftColor.postUpdate("230,1,10")
+end
+
