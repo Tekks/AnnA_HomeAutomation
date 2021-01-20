@@ -1,10 +1,8 @@
 #!/usr/local/bin/python
 
-import time, os
-import datetime
+import time, os, json, threading
 import paho.mqtt.client as mqtt
 from termcolor import colored
-import json
 from yeelight import Bulb
 
 
@@ -28,7 +26,10 @@ def mqttQuery(client, userdata, msg):
     hsv = int(float(data["colorCode"].split(",")[0]))
     sat = int(float(data["colorCode"].split(",")[1]))
     val = int(float(data["colorCode"].split(",")[2]))
+    threading.Thread(target=setColor, args=(data, bulb, hsv, sat, val,)).start()
 
+
+def setColor(data, bulb, hsv, sat, val):
     try:
         if (val == 0):
             bulb.turn_off()
